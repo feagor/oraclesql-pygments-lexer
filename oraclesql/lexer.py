@@ -1,7 +1,9 @@
 from pygments.lexers.sql import SqlLexer
 from pygments.token import Keyword, Name
 
-from oraclesql._oraclesql_builtins import ORACLE_KEYWORDS
+from oraclesql._oraclesql_builtins import ORACLE_KEYWORDS, ORACLE_PLSQL_KEYWORDS
+
+ORACLE_KEYWORDS += ORACLE_PLSQL_KEYWORDS
 
 __all__ = ["OracleSQLLexer"]
 

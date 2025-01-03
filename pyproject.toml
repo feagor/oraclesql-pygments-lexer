@@ -3,8 +3,8 @@ requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "oracleplsql-pygments-lexer"
-version = "0.1.0"
+name = "oraclesql-pygments-lexer"
+version = "0.1.1"
 authors = [
     { name = "Felipe Zorzo", email = "felipe.b.zorzo@gmail.com" },
     { name = "Rafaël Lopez", email = "lopez@airelle.info" }
@@ -12,7 +12,7 @@ authors = [
 maintainers = [
     { name = "Rafaël Lopez", email = "lopez@airelle.info" }
 ]
-description = "Pygments lexer for Oracle PL/SQL"
+description = "Pygments lexer for Oracle SQL and PL/SQL"
 dependencies = ["pygments"]
 readme = "README.md"
 license = { file = "LICENSE.txt" }
