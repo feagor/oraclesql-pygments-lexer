@@ -18,7 +18,7 @@ class OracleSQLLexer(SqlLexer):
         extra_content = [(ORACLE_KEYWORDS, Keyword)]
 
         for index, token, value in SqlLexer.get_tokens_unprocessed(self, text):
-            if token is Name:
+            if token is Name or token is Name.Builtin:
                 for i in extra_content:
                     if value in i[0]:
                         yield index, i[1], value

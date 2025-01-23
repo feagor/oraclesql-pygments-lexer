@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "oraclesql-pygments-lexer"
-version = "0.1.1"
+version = "0.1.2"
 authors = [
     { name = "Felipe Zorzo", email = "felipe.b.zorzo@gmail.com" },
     { name = "Rafaël Lopez", email = "lopez@airelle.info" }
