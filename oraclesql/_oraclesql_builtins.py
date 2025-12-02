@@ -1,5 +1,11 @@
-__all__ = ["ORACLE_KEYWORDS", "ORACLE_PLSQL_KEYWORDS"]
+__all__ = ["ORACLE_KEYWORDS", "ORACLE_PLSQL_KEYWORDS", "ORACLE_DATATYPES"]
 
+# Список типов данных
+ORACLE_DATATYPES = [
+    'VARCHAR2', 'NVARCHAR2', 'CHAR','NUMBER', 'LONG', 'DATE', 'BINARY_FLOAT', 'BINARY_DOUBLE',
+    'TIMESTAMP', 'INTERVAL', 'YEAR', 'DAY', 'SECOND', 'ZONE', 'CLOB', 'NCLOB', 'BLOB', 'BFILE',
+    'RAW', 'ROWID', 'UROWID', 'BOOLEAN', 'PLS_INTEGER', 'BINARY_INTEGER', 'REF', 'cursor'
+]
 # Oracle reserved keywords
 # https://docs.oracle.com/en/database/oracle/oracle-database/23/refrn/V-RESERVED_WORDS.html#REFRN30204
 ORACLE_KEYWORDS = [
