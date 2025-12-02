@@ -13,10 +13,16 @@ ORACLE_FUNCTIONS = [
     'INSTR', 'TRUNC', 'ROUND', 'SYSDATE', 'USER'
 ]
 
-# Системные пакеты
-ORACLE_PACKAGES = [
-    'DBMS_OUTPUT', 'DBMS_UTILITY', 'DBMS_SQL', 'DBMS_JOB', 'DBMS_LOB',
-    'UTL_FILE', 'UTL_HTTP'
+# Список префиксов системных пакетов
+ORACLE_PACKAGE_PREFIXES = [
+    'DBMS_', 
+    'UTL_', 
+    'CTX_', 
+    'APEX_', # Часто используется
+    'OWA_',  # Web toolkit
+    'HTP_',  # Hypertext procedures
+    'ORD_',  # Oracle Multimedia
+    'WPG_'   # Web Gateway
 ]
 # Oracle reserved keywords
 # https://docs.oracle.com/en/database/oracle/oracle-database/23/refrn/V-RESERVED_WORDS.html#REFRN30204
