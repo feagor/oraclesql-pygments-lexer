@@ -19,8 +19,8 @@ class OracleSQLLexer(SqlLexer):
         # Определяем приоритет проверки:
         # Сначала проверяем Типы, потом Ключевые слова
         extra_content = [
-            (ALL_TYPES, Keyword.Type),  # Типы данных красим в Keyword.Type
-            (ALL_KEYWORDS, Keyword)     # Остальное в Keyword
+            (ALL_TYPES, Name.Builtin),
+            (ALL_KEYWORDS, Keyword)
         ]
 
         for index, token, value in SqlLexer.get_tokens_unprocessed(self, text):
@@ -40,3 +40,4 @@ class OracleSQLLexer(SqlLexer):
                     yield index, token, value
             else:
                 yield index, token, value
+
