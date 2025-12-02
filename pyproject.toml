@@ -7,7 +7,8 @@ name = "oraclesql-pygments-lexer"
 version = "0.1.2"
 authors = [
     { name = "Felipe Zorzo", email = "felipe.b.zorzo@gmail.com" },
-    { name = "Rafaël Lopez", email = "lopez@airelle.info" }
+    { name = "Rafaël Lopez", email = "lopez@airelle.info" },
+    { name = "feagor", email = "feagor@mail.ru" }
 ]
 maintainers = [
     { name = "Rafaël Lopez", email = "lopez@airelle.info" }
