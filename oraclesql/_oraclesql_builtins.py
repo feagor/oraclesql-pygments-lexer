@@ -6,6 +6,18 @@ ORACLE_DATATYPES = [
     'TIMESTAMP', 'INTERVAL', 'YEAR', 'DAY', 'SECOND', 'ZONE', 'CLOB', 'NCLOB', 'BLOB', 'BFILE',
     'RAW', 'ROWID', 'UROWID', 'BOOLEAN', 'PLS_INTEGER', 'BINARY_INTEGER', 'REF', 'cursor'
 ]
+
+ORACLE_FUNCTIONS = [
+    'NVL', 'NVL2', 'DECODE', 'TO_CHAR', 'TO_NUMBER', 'TO_DATE', 
+    'REGEXP_LIKE', 'REGEXP_SUBSTR', 'REGEXP_REPLACE', 'SUBSTR', 
+    'INSTR', 'TRUNC', 'ROUND', 'SYSDATE', 'USER'
+]
+
+# Системные пакеты
+ORACLE_PACKAGES = [
+    'DBMS_OUTPUT', 'DBMS_UTILITY', 'DBMS_SQL', 'DBMS_JOB', 'DBMS_LOB',
+    'UTL_FILE', 'UTL_HTTP'
+]
 # Oracle reserved keywords
 # https://docs.oracle.com/en/database/oracle/oracle-database/23/refrn/V-RESERVED_WORDS.html#REFRN30204
 ORACLE_KEYWORDS = [
@@ -902,7 +914,6 @@ ORACLE_KEYWORDS += [
     "INSTRC",
     "INSTR2",
     "INSTR4",
-    "INT",
     "INTERLEAVED",
     "INTERMEDIATE",
     "INTERNAL_CONVERT",
@@ -2660,7 +2671,6 @@ ORACLE_PLSQL_KEYWORDS += [
     "INDICES",
     "INFINITE",
     "INSTANTIABLE",
-    "INT",
     "INTERFACE",
     "INTERVAL",
     "INVALIDATE",
@@ -2827,12 +2837,4 @@ ORACLE_PLSQL_KEYWORDS += [
     "WRITE",
     "YEAR",
     "ZONE",
-]
-
-# Other
-ORACLE_PLSQL_KEYWORDS += [
-    "DBMS_OUTPUT",
-    "NOTFOUND",
-    "PUT_LINE",
-    "ROWCOUNT"
 ]
