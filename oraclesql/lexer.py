@@ -1,7 +1,11 @@
 from pygments.lexers.sql import SqlLexer
 from pygments.token import Keyword, Name
 
-from oraclesql._oraclesql_builtins import ORACLE_KEYWORDS, ORACLE_PLSQL_KEYWORDS, ORACLE_DATATYPES
+# Импортируйте новые списки
+from oraclesql._oraclesql_builtins import (
+    ORACLE_KEYWORDS, ORACLE_PLSQL_KEYWORDS, ORACLE_DATATYPES, 
+    ORACLE_FUNCTIONS, ORACLE_PACKAGES
+)
 
 # Объединяем ключевые слова в один Set для скорости (O(1) поиск)
 ALL_KEYWORDS = set(ORACLE_KEYWORDS + ORACLE_PLSQL_KEYWORDS)
@@ -16,11 +20,11 @@ class OracleSQLLexer(SqlLexer):
     mimetypes = ["text/x-oracle-plsql"]
 
     def get_tokens_unprocessed(self, text):
-        # Определяем приоритет проверки:
-        # Сначала проверяем Типы, потом Ключевые слова
         extra_content = [
-            (ALL_TYPES, Name.Builtin),
-            (ALL_KEYWORDS, Keyword)
+            (set(ORACLE_DATATYPES), Name.Builtin),   # Голубой (типы)
+            (set(ORACLE_FUNCTIONS), Name.Function),  # Обычно желтый или зеленый (функции)
+            (set(ORACLE_PACKAGES), Name.Namespace),  # Обычно курсив или другой цвет (пакеты)
+            (set(ORACLE_KEYWORDS + ORACLE_PLSQL_KEYWORDS), Keyword) # Фиолетовый
         ]
 
         for index, token, value in SqlLexer.get_tokens_unprocessed(self, text):
@@ -40,4 +44,5 @@ class OracleSQLLexer(SqlLexer):
                     yield index, token, value
             else:
                 yield index, token, value
+
 
