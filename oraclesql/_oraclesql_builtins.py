@@ -53,14 +53,23 @@ ORACLE_KEYWORDS_PLSQL = [
 # --- 4. Data Types and Type Declarations ---
 # Pygments Token: Token.Keyword.Type
 ORACLE_KEYWORDS_TYPE = [
-    # Core Data Types
-    'VARCHAR2', 'NVARCHAR2', 'CHAR', 'NCHAR', 'NUMBER', 'LONG', 'DATE', 'TIMESTAMP', 
-    'INTERVAL', 'CLOB', 'NCLOB', 'BLOB', 'RAW', 'ROWID', 'BOOLEAN', 
-    # Specialized/PL/SQL Types
-    'PLS_INTEGER', 'BINARY_INTEGER', 'BINARY_FLOAT', 'BINARY_DOUBLE', 
-    # Declarations
-    'TYPE', 'SUBTYPE', 'REF', 'TABLE', 'VARRAY', 'OF', 'OUT', 'IN', 'DEFAULT', 'NOCOPY',
-    'XMLTYPE',
+    # Character
+    'CHAR', 'VARCHAR2', 'VARCHAR', 'NCHAR', 'NVARCHAR2', 'CLOB', 'NCLOB', 'LONG',
+    # Numeric (SQL)
+    'NUMBER', 'INTEGER', 'INT', 'SMALLINT', 'DECIMAL', 'NUMERIC', 'FLOAT', 'REAL', 'DOUBLE PRECISION',
+    # Numeric (PL/SQL)
+    'PLS_INTEGER', 'BINARY_INTEGER', 'SIMPLE_INTEGER', 'BINARY_FLOAT', 'BINARY_DOUBLE',
+    # Date / Time
+    'DATE', 'TIMESTAMP', 'TIMESTAMP WITH TIME ZONE', 'TIMESTAMP WITH LOCAL TIME ZONE',
+    'INTERVAL YEAR TO MONTH', 'INTERVAL DAY TO SECOND',
+    # LOB
+    'CLOB', 'NCLOB', 'BLOB', 'BFILE', 'LONG', 'LONG RAW',
+    # RAW / Binary
+    'RAW', 'LONG RAW',
+    # ROWID
+    'ROWID', 'UROWID',
+    # Other
+    'BOOLEAN', 'XMLTYPE', 'URITYPE', 'DBURITYPE', 'XDBURITYPE', 'ANYTYPE', 'ANYDATA', 'ANYDATASET', 'MLSLABEL',
 ]
 
 
