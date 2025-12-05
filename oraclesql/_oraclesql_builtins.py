@@ -14,27 +14,29 @@ ORACLE_SYS_PCK_PREF = [
 # Defines the main structure and operation of a SQL statement (DML, DDL).
 # Pygments Token: Token.Keyword.Control
 ORACLE_KEYWORDS_MAIN_CONTROL = [
+    # DML/DDL/DCL
     'SELECT', 'INSERT', 'UPDATE', 'DELETE', 'MERGE', 
     'CREATE', 'ALTER', 'DROP', 'TRUNCATE', 'RENAME', 'GRANT', 'REVOKE', 
     'COMMIT', 'ROLLBACK', 'SAVEPOINT', 'LOCK', 'EXPLAIN', 'CONNECT', 'START', 
     'VIEW', 'SESSION', 'SYSTEM', 'PROCEDURE', 'FUNCTION', 'PACKAGE', 'TRIGGER', 'INDEX', 'SEQUENCE', 'TABLESPACE',
+    
+    # Main Clauses (Now combined)
+    'FROM', 'WHERE', 'SET', 'GROUP', 'HAVING', 'ORDER', 'BY', 'WITH', 'FOR', 
+    'UNION', 'INTERSECT', 'MINUS', 'UNIQUE', 'AS', 'INTO',
+    
+    # Joins (Main join keywords)
+    'JOIN', 'INNER', 'LEFT', 'RIGHT', 'FULL', 'OUTER', 'CROSS',
 ]
 
-# --- 2. Auxiliary Keywords and Clauses ---
-# Defines clauses, predicates, and join conditions.
+# --- 2. Auxiliary Keywords and Predicates ---
+# Defines predicates, logical operators, and join conditions.
 # Pygments Token: Token.Keyword.Constant
 ORACLE_KEYWORDS_AUXILIARY = [
-    'FROM', 'WHERE', 'SET', 'GROUP', 'HAVING', 'ORDER', 'BY', 'WITH', 'FOR', 
-    'UNION', 'INTERSECT', 'MINUS', 'DISTINCT', 'UNIQUE',
-    
     # Predicates and Logical Operators
-    'AND', 'OR', 'NOT', 'IN', 'LIKE', 'IS', 'NULL', 'BETWEEN', 'EXISTS', 'ALL', 'ANY', 'SOME',
+    'DISTINCT', 'AND', 'OR', 'NOT', 'IN', 'LIKE', 'IS', 'NULL', 'BETWEEN', 'EXISTS', 'ALL', 'ANY', 'SOME',
     
-    # Joins
-    'JOIN', 'INNER', 'LEFT', 'RIGHT', 'FULL', 'OUTER', 'ON', 'USING', 'NATURAL', 'CROSS',
-    
-    # Miscellaneous
-    'AS', 'TO', 'INTO', 'CASCADE', 'FORCE', 'SHARE', 'EXCLUSIVE', 'VALIDATE',
+    # Join Conditions / Miscellaneous
+    'ON', 'USING', 'NATURAL', 'TO', 'CASCADE', 'FORCE', 'SHARE', 'EXCLUSIVE', 'VALIDATE',
 ]
 
 # --- 3. PL/SQL Keywords ---
