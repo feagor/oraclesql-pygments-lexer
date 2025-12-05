@@ -25,7 +25,7 @@ __all__ = ["OracleSQLLexer"]
 
 class OracleSQLLexer(SqlLexer):
     name = "Oracle PL/SQL"
-    aliases = ["oraclesql"]
+    aliases = ["oraclesql","ora","plsql"]
     mimetypes = ["text/x-oracle-plsql"]
 
     def get_tokens_unprocessed(self, text):
@@ -97,4 +97,5 @@ class OracleSQLLexer(SqlLexer):
                 # Any other token (e.g., Literal, Operator) breaks the chain
                 package_chain_state = 0
                 yield index, token, value
+
 
