@@ -9,7 +9,12 @@ ORACLE_SYS_PCK_PREF = [
     'OWA_',  # Web applications support
 ]
 
-
+# --- System Object Prefixes (Tables, Views, etc.) ---
+# Used to mark Oracle system objects (V$, DBA_, ALL_, USER_).
+# Pygments Token: Token.Name.Label
+ORACLE_SYS_OBJ_PREF = [
+    'DBA_', 'ALL_', 'USER_', 'V$', 'GV$', 'CDB_', 'PDB_', 'X$'
+]
 # --- 1. Main Control Keywords ---
 # Defines the main structure and operation of a SQL statement (DML, DDL).
 # Pygments Token: Token.Keyword.Control
