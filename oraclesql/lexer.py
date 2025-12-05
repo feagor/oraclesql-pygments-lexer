@@ -33,11 +33,11 @@ class OracleSQLLexer(SqlLexer):
         # Mappings for token refinement: (word set, specific token type)
         # Order is important for lookup speed
         KEYWORD_MAPPINGS = [
-            (ALL_MAIN_CONTROL_KEYWORDS, Keyword.Control),   # SELECT, CREATE, etc.
-            (ALL_PLSQL_KEYWORDS, Keyword.Declaration),       # BEGIN, IF, LOOP, etc.
-            (ALL_AUXILIARY_KEYWORDS, Keyword.Constant),      # WHERE, JOIN, AND, LIKE, etc.
-            (ALL_TYPES, Keyword.Type),                      # VARCHAR2, NUMBER, etc.
-            (ALL_BUILTINS, Name.Builtin),                   # COUNT, TO_DATE, ROWNUM, etc.
+            (ALL_MAIN_CONTROL_KEYWORDS, Keyword.Control),        # SELECT, FROM, WHERE, CREATE, etc.
+            (ALL_PLSQL_KEYWORDS, Keyword.Declaration),           # BEGIN, IF, LOOP, etc.
+            (ALL_AUXILIARY_KEYWORDS, Keyword.Constant),          # AND, LIKE, ON, BETWEEN, etc.
+            (ALL_TYPES, Keyword.Type),                           # VARCHAR2, NUMBER, etc.
+            (ALL_BUILTINS, Name.Builtin),                        # COUNT, TO_DATE, ROWNUM, etc.
         ]
 
         # 0=none, 1=package_name_seen, 2=dot_seen_expecting_method
@@ -97,3 +97,4 @@ class OracleSQLLexer(SqlLexer):
                 # Any other token (e.g., Literal, Operator) breaks the chain
                 package_chain_state = 0
                 yield index, token, value
+
