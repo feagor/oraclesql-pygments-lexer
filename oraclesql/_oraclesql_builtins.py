@@ -7,22 +7,19 @@ ORACLE_DATATYPES = [
     'RAW', 'ROWID', 'UROWID', 'BOOLEAN', 'PLS_INTEGER', 'BINARY_INTEGER', 'REF', 'cursor'
 ]
 
-ORACLE_FUNCTIONS = [
+ORACLE_FUNC = [
     'NVL', 'NVL2', 'DECODE', 'TO_CHAR', 'TO_NUMBER', 'TO_DATE', 
     'REGEXP_LIKE', 'REGEXP_SUBSTR', 'REGEXP_REPLACE', 'SUBSTR', 
-    'INSTR', 'TRUNC', 'ROUND', 'SYSDATE', 'USER'
+    'INSTR', 'TRUNC', 'ROUND', 'SYSDATE','SYSTIMESTAMP', 'USER'
 ]
 
 # Список префиксов системных пакетов
-ORACLE_PACKAGE_PREFIXES = [
-    'DBMS_', 
-    'UTL_', 
-    'CTX_', 
-    'APEX_', # Часто используется
-    'OWA_',  # Web toolkit
-    'HTP_',  # Hypertext procedures
-    'ORD_',  # Oracle Multimedia
-    'WPG_'   # Web Gateway
+ORACLE_SYS_PCK_PREF = [
+    'DBMS_', #Main 
+    'UTL_',  #Utils
+    'CTX_'   #Oracle Text datatype support
+    'APEX_', #Application Express
+    'OWA_',  #Web applications support
 ]
 # Oracle reserved keywords
 # https://docs.oracle.com/en/database/oracle/oracle-database/23/refrn/V-RESERVED_WORDS.html#REFRN30204
