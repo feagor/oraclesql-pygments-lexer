@@ -1,7 +1,7 @@
 from pygments.lexers.sql import SqlLexer
 from pygments.token import Keyword, Name, Punctuation, Text, Whitespace, Comment
 
-# Import lists
+# Import all builtins, including new system object and refined lists
 from oraclesql._oraclesql_builtins import (
     ORACLE_KEYWORDS_MAIN_CONTROL,
     ORACLE_KEYWORDS_AUXILIARY,
@@ -9,7 +9,7 @@ from oraclesql._oraclesql_builtins import (
     ORACLE_KEYWORDS_TYPE,
     ORACLE_BUILTINS_NAME,
     ORACLE_SYS_PCK_PREF,
-    ORACLE_SYS_OBJ_PREF # System Objects still needed for DBA_ etc.
+    ORACLE_SYS_OBJ_PREF
 )
 
 # Create combined sets for efficient lookup
@@ -18,6 +18,8 @@ ALL_MAIN_CONTROL_KEYWORDS = set(ORACLE_KEYWORDS_MAIN_CONTROL)
 ALL_AUXILIARY_KEYWORDS = set(ORACLE_KEYWORDS_AUXILIARY)
 ALL_TYPES = set(ORACLE_KEYWORDS_TYPE)
 ALL_BUILTINS = set(ORACLE_BUILTINS_NAME)
+
+# Convert prefixes to tuples for fast string matching
 PACKAGE_PREFIXES_TUPLE = tuple(ORACLE_SYS_PCK_PREF)
 SYSTEM_OBJECT_PREFIXES_TUPLE = tuple(ORACLE_SYS_OBJ_PREF)
 
@@ -30,42 +32,37 @@ class OracleSQLLexer(SqlLexer):
 
     def get_tokens_unprocessed(self, text):
         
+        # Mappings for token refinement: (word set, specific token type)
         KEYWORD_MAPPINGS = [
-            (ALL_MAIN_CONTROL_KEYWORDS, Keyword.Control),   
-            (ALL_PLSQL_KEYWORDS, Keyword.Declaration),       
-            (ALL_AUXILIARY_KEYWORDS, Keyword.Constant),      
-            (ALL_TYPES, Keyword.Type),                      
-            (ALL_BUILTINS, Name.Builtin),                   
+            (ALL_MAIN_CONTROL_KEYWORDS, Keyword.Control),       # SELECT, FROM, WHERE, CREATE, etc.
+            (ALL_PLSQL_KEYWORDS, Keyword.Declaration),           # BEGIN, IF, LOOP, etc.
+            (ALL_AUXILIARY_KEYWORDS, Keyword.Constant),          # AND, LIKE, ON, BETWEEN, etc.
+            (ALL_TYPES, Keyword.Type),                          # VARCHAR2, NUMBER, etc.
+            (ALL_BUILTINS, Name.Builtin),                       # COUNT, TO_DATE, ROWNUM, etc.
         ]
 
         # 0=none, 1=package_name_seen, 2=dot_seen_expecting_method
         package_chain_state = 0
-        package_chain_buffer = [] # Buffer to store index, token, value of the chain (e.g., dbms_output)
+        package_chain_buffer = [] # Buffer for (index, token, value) of the package.function chain
+
+        # Helper function to yield the buffered chain as a single token
+        def flush_and_yield_buffer(final_token=None):
+            nonlocal package_chain_state, package_chain_buffer
+            if package_chain_buffer:
+                start_index = package_chain_buffer[0][0]
+                full_value = "".join(item[2] for item in package_chain_buffer)
+                
+                # Use Name.Builtin for the combined system call
+                yield start_index, final_token if final_token else package_chain_buffer[-1][1], full_value
+            
+            package_chain_buffer = []
+            package_chain_state = 0
 
         # Use parent lexer for initial tokenization
         for index, token, value in SqlLexer.get_tokens_unprocessed(self, text):
             
-            # Helper to flush buffer and reset state
-            def flush_and_yield_buffer(final_token=None):
-                nonlocal package_chain_state, package_chain_buffer
-                # If we have a buffer, yield it
-                if package_chain_buffer:
-                    # Yield the whole chain as one token at the starting index
-                    start_index = package_chain_buffer[0][0]
-                    full_value = "".join(item[2] for item in package_chain_buffer)
-                    
-                    # Use the final_token provided, or Name.Builtin as default for the system call
-                    yield start_index, final_token if final_token else Name.Builtin, full_value
-                
-                # Reset
-                package_chain_buffer = []
-                package_chain_state = 0
-
-            # --- Start Logic ---
-            
-            # Non-code tokens (yield and maintain buffer if not broken)
+            # Non-code tokens (yield and maintain buffer if in chain)
             if token in Comment or token is Text or token is Whitespace:
-                # If we are in chain state, append it to buffer (e.g. whitespace between tokens)
                 if package_chain_state > 0:
                     package_chain_buffer.append((index, token, value))
                 else:
@@ -88,23 +85,22 @@ class OracleSQLLexer(SqlLexer):
                 # B. Check for SYSTEM PACKAGE prefixes (DBMS_..., UTL_...) - START OF CHAIN
                 if val_upper.startswith(PACKAGE_PREFIXES_TUPLE):
                     # Save the package name to buffer, do NOT yield yet
+                    yield from flush_and_yield_buffer() # Flush any unexpected state
                     package_chain_buffer.append((index, token, value))
                     package_chain_state = 1 # Mark: we saw a package name
                     continue
                 
                 # C. Check for SYSTEM OBJECT prefixes (DBA_HIST_..., V$...) - NO CHAIN
                 if val_upper.startswith(SYSTEM_OBJECT_PREFIXES_TUPLE):
-                    # Flush any incomplete chain, then yield current token as Name.Label
-                    yield from flush_and_yield_buffer() 
-                    yield index, Name.Label, value
+                    yield from flush_and_yield_buffer() # Flush any incomplete chain
+                    yield index, Name.Label, value # Highlight as a distinct system object
                     continue
                 
                 # D. Refine regular tokens (Keywords, Types, Builtins) - NO CHAIN
                 found_match = False
                 for word_set, token_type in KEYWORD_MAPPINGS:
                     if val_upper in word_set:
-                        # Flush any incomplete chain, then yield current token
-                        yield from flush_and_yield_buffer()
+                        yield from flush_and_yield_buffer() # Flush any incomplete chain
                         yield index, token_type, value
                         found_match = True
                         break
@@ -113,8 +109,7 @@ class OracleSQLLexer(SqlLexer):
                     continue
 
                 # E. Plain identifier (user table, column, variable)
-                # Flush any incomplete chain, then yield current token
-                yield from flush_and_yield_buffer() 
+                yield from flush_and_yield_buffer() # Flush any incomplete chain
                 yield index, token, value
 
             elif token is Punctuation and value == '.':
@@ -123,7 +118,7 @@ class OracleSQLLexer(SqlLexer):
                     package_chain_buffer.append((index, token, value)) # Save the dot
                     package_chain_state = 2 # Package seen, expect method next
                 else:
-                    # Flush any incomplete chain (e.g. table.column), then yield the dot
+                    # Not in a package chain (e.g., table.column)
                     yield from flush_and_yield_buffer()
                     yield index, token, value
             
