@@ -1,30 +1,34 @@
-# --- System Package Prefixes (Required by User) ---
-# Used in lexer rules to highlight common system calls.
-# Pygments Token: Token.Name.Builtin.System (or similar)
+# --- System Package Prefixes ---
+# Used to mark Oracle system packages (e.g., in DBMS_OUTPUT.PUT_LINE)
+# Pygments Token: Token.Name.Namespace
 ORACLE_SYS_PCK_PREF = [
     'DBMS_', # Main 
-    'UTL_',  # Utils
+    'UTL_',  # Utilities
     'CTX_',  # Oracle Text datatype support
     'APEX_', # Application Express
     'OWA_',  # Web applications support
 ]
 
 
-# --- 1. Control Keywords (SQL DDL, DML, DCL, and Clauses) ---
-# Defines the structure of the query or operation.
+# --- 1. Main Control Keywords ---
+# Defines the main structure and operation of a SQL statement (DML, DDL).
 # Pygments Token: Token.Keyword.Control
-ORACLE_KEYWORDS_CONTROL = [
-    # DDL/DML/DCL (Main Operators)
-    'SELECT', 'INSERT', 'UPDATE', 'DELETE', 'MERGE', 'FROM', 'WHERE', 'SET', 
+ORACLE_KEYWORDS_MAIN_CONTROL = [
+    'SELECT', 'INSERT', 'UPDATE', 'DELETE', 'MERGE', 
     'CREATE', 'ALTER', 'DROP', 'TRUNCATE', 'RENAME', 'GRANT', 'REVOKE', 
     'COMMIT', 'ROLLBACK', 'SAVEPOINT', 'LOCK', 'EXPLAIN', 'CONNECT', 'START', 
     'VIEW', 'SESSION', 'SYSTEM', 'PROCEDURE', 'FUNCTION', 'PACKAGE', 'TRIGGER', 'INDEX', 'SEQUENCE', 'TABLESPACE',
+]
+
+# --- 2. Auxiliary Keywords and Clauses ---
+# Defines clauses, predicates, and join conditions.
+# Pygments Token: Token.Keyword.Constant
+ORACLE_KEYWORDS_AUXILIARY = [
+    'FROM', 'WHERE', 'SET', 'GROUP', 'HAVING', 'ORDER', 'BY', 'WITH', 'FOR', 
+    'UNION', 'INTERSECT', 'MINUS', 'DISTINCT', 'UNIQUE',
     
     # Predicates and Logical Operators
     'AND', 'OR', 'NOT', 'IN', 'LIKE', 'IS', 'NULL', 'BETWEEN', 'EXISTS', 'ALL', 'ANY', 'SOME',
-    
-    # Structural/Ordering/Grouping
-    'GROUP', 'HAVING', 'ORDER', 'BY', 'WITH', 'FOR', 'UNION', 'INTERSECT', 'MINUS', 'DISTINCT', 'UNIQUE',
     
     # Joins
     'JOIN', 'INNER', 'LEFT', 'RIGHT', 'FULL', 'OUTER', 'ON', 'USING', 'NATURAL', 'CROSS',
@@ -33,10 +37,9 @@ ORACLE_KEYWORDS_CONTROL = [
     'AS', 'TO', 'INTO', 'CASCADE', 'FORCE', 'SHARE', 'EXCLUSIVE', 'VALIDATE',
 ]
 
-
-# --- 2. PL/SQL Keywords ---
+# --- 3. PL/SQL Keywords ---
 # Defines the structure of the PL/SQL program block.
-# Pygments Token: Token.Keyword.Control / Token.Keyword.Declaration
+# Pygments Token: Token.Keyword.Declaration
 ORACLE_KEYWORDS_PLSQL = [
     'BEGIN', 'END', 'DECLARE', 'EXCEPTION', 'WHEN', 'OTHERS', 'THEN', 'ELSIF', 'ELSE', 
     'IF', 'LOOP', 'WHILE', 'FOR', 'EXIT', 'CONTINUE', 'GOTO', 'PRAGMA', 'AUTONOMOUS',
@@ -45,7 +48,7 @@ ORACLE_KEYWORDS_PLSQL = [
 ]
 
 
-# --- 3. Data Types and Declarations (Type Keywords) ---
+# --- 4. Data Types and Type Declarations ---
 # Pygments Token: Token.Keyword.Type
 ORACLE_KEYWORDS_TYPE = [
     # Core Data Types
@@ -59,7 +62,7 @@ ORACLE_KEYWORDS_TYPE = [
 ]
 
 
-# --- 4. Built-in Functions and Pseudo-Columns ---
+# --- 5. Built-in Functions and Pseudo-Columns ---
 # The most common built-in functions and system variables.
 # Pygments Token: Token.Name.Builtin
 ORACLE_BUILTINS_NAME = [
