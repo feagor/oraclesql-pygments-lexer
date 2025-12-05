@@ -23,12 +23,10 @@ ORACLE_KEYWORDS_MAIN_CONTROL = [
     'SELECT', 'INSERT', 'UPDATE', 'DELETE', 'MERGE', 
     'CREATE', 'ALTER', 'DROP', 'TRUNCATE', 'RENAME', 'GRANT', 'REVOKE', 
     'COMMIT', 'ROLLBACK', 'SAVEPOINT', 'LOCK', 'EXPLAIN', 'CONNECT', 'START', 
-    'VIEW', 'SESSION', 'SYSTEM', 'PROCEDURE', 'FUNCTION', 'PACKAGE', 'TRIGGER', 'INDEX', 'SEQUENCE', 'TABLESPACE',
-    
+    'VIEW', 'SESSION', 'SYSTEM', 'PROCEDURE', 'FUNCTION', 'PACKAGE', 'TRIGGER', 'INDEX', 'SEQUENCE', 'TABLESPACE',    
     # Main Clauses (Now combined)
     'FROM', 'WHERE', 'SET', 'GROUP', 'HAVING', 'ORDER', 'BY', 'WITH', 'FOR', 
-    'UNION', 'INTERSECT', 'MINUS', 'UNIQUE', 'AS', 'INTO',
-    
+    'UNION', 'INTERSECT', 'MINUS', 'UNIQUE', 'AS', 'INTO',    
     # Joins (Main join keywords)
     'JOIN', 'INNER', 'LEFT', 'RIGHT', 'FULL', 'OUTER', 'CROSS',
 ]
@@ -38,8 +36,7 @@ ORACLE_KEYWORDS_MAIN_CONTROL = [
 # Pygments Token: Token.Keyword.Constant
 ORACLE_KEYWORDS_AUXILIARY = [
     # Predicates and Logical Operators
-    'DISTINCT', 'AND', 'OR', 'NOT', 'IN', 'LIKE', 'IS', 'NULL', 'BETWEEN', 'EXISTS', 'ALL', 'ANY', 'SOME',
-    
+    'DISTINCT', 'AND', 'OR', 'NOT', 'IN', 'LIKE', 'IS', 'NULL', 'BETWEEN', 'EXISTS', 'ALL', 'ANY', 'SOME',    
     # Join Conditions / Miscellaneous
     'ON', 'USING', 'NATURAL', 'TO', 'CASCADE', 'FORCE', 'SHARE', 'EXCLUSIVE', 'VALIDATE',
 ]
@@ -53,7 +50,6 @@ ORACLE_KEYWORDS_PLSQL = [
     'BODY', 'IS', 'AS', 'RETURN', 'CONSTANT', 'ACCESS', 'ROW', 'MEMBER', 'SELF',
     'PIPEDED', 'RESULT', 'DETERMINISTIC',
 ]
-
 
 # --- 4. Data Types and Type Declarations ---
 # Pygments Token: Token.Keyword.Type
@@ -77,27 +73,22 @@ ORACLE_KEYWORDS_TYPE = [
     'BOOLEAN', 'XMLTYPE', 'URITYPE', 'DBURITYPE', 'XDBURITYPE', 'ANYTYPE', 'ANYDATA', 'ANYDATASET', 'MLSLABEL',
 ]
 
-
 # --- 5. Built-in Functions and Pseudo-Columns ---
 # The most common built-in functions and system variables.
 # Pygments Token: Token.Name.Builtin
 ORACLE_BUILTINS_NAME = [
     # Aggregate and Analytic
     'COUNT', 'SUM', 'AVG', 'MIN', 'MAX', 'STDDEV', 'VARIANCE', 'LISTAGG', 
-    'RANK', 'DENSE_RANK', 'ROW_NUMBER', 'CUME_DIST', 'LAG', 'LEAD', 'OVER', 'PARTITION', 'KEEP',
-    
+    'RANK', 'DENSE_RANK', 'ROW_NUMBER', 'CUME_DIST', 'LAG', 'LEAD', 'OVER', 'PARTITION', 'KEEP',    
     # Conversion and Conditional
     'TO_CHAR', 'TO_DATE', 'TO_NUMBER', 'NVL', 'NVL2', 'DECODE', 'COALESCE', 'NULLIF', 'CAST', 
-    'CONVERT', 'CASE', 
-    
+    'CONVERT', 'CASE',     
     # String Functions
     'SUBSTR', 'INSTR', 'LENGTH', 'TRIM', 'LTRIM', 'RTRIM', 'UPPER', 'LOWER', 'INITCAP', 'LPAD', 'RPAD', 
-    'CONCAT', 'TRANSLATE', 'REPLACE', 'REGEXP_LIKE', 'REGEXP_SUBSTR', 'REGEXP_REPLACE', 
-    
+    'CONCAT', 'TRANSLATE', 'REPLACE', 'REGEXP_LIKE', 'REGEXP_SUBSTR', 'REGEXP_REPLACE',     
     # Date/Time
     'SYSDATE', 'SYSTIMESTAMP', 'CURRENT_DATE', 'CURRENT_TIMESTAMP', 'SESSIONTIMEZONE', 
-    'DBTIMEZONE', 'ROUND', 'TRUNC', 'ADD_MONTHS', 'MONTHS_BETWEEN', 'NEXT_DAY', 'LAST_DAY',
-    
+    'DBTIMEZONE', 'ROUND', 'TRUNC', 'ADD_MONTHS', 'MONTHS_BETWEEN', 'NEXT_DAY', 'LAST_DAY',    
     # Pseudo-Columns/Environment
     'ROWNUM', 'LEVEL', 'USER', 'UID', 'SYS_GUID', 'SQLCODE', 'SQLERRM', 
     'NEXTVAL', 'CURRVAL', 'DB_NAME', 'SESSION_USER',
