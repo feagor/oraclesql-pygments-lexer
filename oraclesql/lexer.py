@@ -46,14 +46,21 @@ class OracleSQLLexer(SqlLexer):
         package_chain_buffer = [] # Buffer for (index, token, value) of the package.function chain
 
         # Helper function to yield the buffered chain as a single token
+        # FIX: Ensure correct token type and handle empty buffer gracefully
         def flush_and_yield_buffer(final_token=None):
             nonlocal package_chain_state, package_chain_buffer
-            if package_chain_buffer:
-                start_index = package_chain_buffer[0][0]
-                full_value = "".join(item[2] for item in package_chain_buffer)
-                
-                # Use Name.Builtin for the combined system call
-                yield start_index, final_token if final_token else package_chain_buffer[-1][1], full_value
+            
+            if not package_chain_buffer:
+                return # Exit if buffer is empty
+            
+            # The token to yield: use final_token, or the token of the first item (Name/Keyword)
+            token_to_yield = final_token if final_token else package_chain_buffer[0][1]
+            start_index = package_chain_buffer[0][0]
+            
+            # Combine all parts of the buffer (including whitespace and dot)
+            full_value = "".join(item[2] for item in package_chain_buffer)
+            
+            yield start_index, token_to_yield, full_value
             
             package_chain_buffer = []
             package_chain_state = 0
@@ -84,8 +91,8 @@ class OracleSQLLexer(SqlLexer):
 
                 # B. Check for SYSTEM PACKAGE prefixes (DBMS_..., UTL_...) - START OF CHAIN
                 if val_upper.startswith(PACKAGE_PREFIXES_TUPLE):
-                    # Save the package name to buffer, do NOT yield yet
-                    yield from flush_and_yield_buffer() # Flush any unexpected state
+                    # Flush any unexpected/incomplete chain, then start new chain
+                    yield from flush_and_yield_buffer() 
                     package_chain_buffer.append((index, token, value))
                     package_chain_state = 1 # Mark: we saw a package name
                     continue
