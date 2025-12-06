@@ -100,7 +100,7 @@ class OracleSQLLexer(SqlLexer):
                 # C. Check for SYSTEM OBJECT prefixes (DBA_HIST_..., V$...) - NO CHAIN
                 if val_upper.startswith(SYSTEM_OBJECT_PREFIXES_TUPLE):
                     yield from flush_and_yield_buffer() # Flush any incomplete chain
-                    yield index, Name.Label, value # Highlight as a distinct system object
+                    yield index, Name.Namespace, value # Highlight as a distinct system object
                     continue
                 
                 # D. Refine regular tokens (Keywords, Types, Builtins) - NO CHAIN
@@ -136,5 +136,6 @@ class OracleSQLLexer(SqlLexer):
         
         # Flush anything left in the buffer at the end of the text
         yield from flush_and_yield_buffer()
+
 
 
