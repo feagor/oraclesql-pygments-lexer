@@ -86,7 +86,7 @@ class OracleSQLLexer(SqlLexer):
                     # Final part of the chain (the function name)
                     package_chain_buffer.append((index, token, value))
                     # FLUSH: Yield the whole package.function as a single Name.Builtin token
-                    yield from flush_and_yield_buffer(Name.Builtin)
+                    yield from flush_and_yield_buffer(Name.Namespace)
                     continue
 
                 # B. Check for SYSTEM PACKAGE prefixes (DBMS_..., UTL_...) - START OF CHAIN
@@ -136,4 +136,5 @@ class OracleSQLLexer(SqlLexer):
         
         # Flush anything left in the buffer at the end of the text
         yield from flush_and_yield_buffer()
+
 
