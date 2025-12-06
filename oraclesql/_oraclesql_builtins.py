@@ -25,7 +25,7 @@ ORACLE_KEYWORDS_MAIN_CONTROL = [
     'COMMIT', 'ROLLBACK', 'SAVEPOINT', 'LOCK', 'EXPLAIN', 'CONNECT', 'START', 
     'VIEW', 'SESSION', 'SYSTEM', 'PROCEDURE', 'FUNCTION', 'PACKAGE', 'TRIGGER', 'INDEX', 'SEQUENCE', 'TABLESPACE',    
     # Main Clauses (Now combined)
-    'FROM', 'WHERE', 'SET', 'GROUP', 'HAVING', 'ORDER', 'BY', 'WITH', 'FOR', 
+    'FROM', 'WHERE', 'AND', 'OR', 'SET', 'GROUP', 'HAVING', 'ORDER', 'BY', 'WITH', 
     'UNION', 'INTERSECT', 'MINUS', 'UNIQUE', 'AS', 'INTO',    
     # Joins (Main join keywords)
     'JOIN', 'INNER', 'LEFT', 'RIGHT', 'FULL', 'OUTER', 'CROSS',
@@ -36,7 +36,7 @@ ORACLE_KEYWORDS_MAIN_CONTROL = [
 # Pygments Token: Token.Keyword.Constant
 ORACLE_KEYWORDS_AUXILIARY = [
     # Predicates and Logical Operators
-    'DISTINCT', 'AND', 'OR', 'NOT', 'IN', 'LIKE', 'IS', 'NULL', 'BETWEEN', 'EXISTS', 'ALL', 'ANY', 'SOME',    
+    'FOR', 'DISTINCT', 'NOT', 'IN', 'LIKE', 'IS', 'NULL', 'BETWEEN', 'EXISTS', 'ALL', 'ANY', 'SOME',    
     # Join Conditions / Miscellaneous
     'ON', 'USING', 'NATURAL', 'TO', 'CASCADE', 'FORCE', 'SHARE', 'EXCLUSIVE', 'VALIDATE',
 ]
