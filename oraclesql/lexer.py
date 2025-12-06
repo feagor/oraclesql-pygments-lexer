@@ -27,7 +27,7 @@ __all__ = ["OracleSQLLexer"]
 
 class OracleSQLLexer(SqlLexer):
     name = "Oracle PL/SQL"
-    aliases = ["oraclesql"]
+    aliases = ["oraclesql","ora","plsql"]
     mimetypes = ["text/x-oracle-plsql"]
 
     def get_tokens_unprocessed(self, text):
@@ -136,3 +136,4 @@ class OracleSQLLexer(SqlLexer):
         
         # Flush anything left in the buffer at the end of the text
         yield from flush_and_yield_buffer()
+
